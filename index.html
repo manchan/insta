@@ -51,10 +51,10 @@
                 <ul>
                     <li class="err" ng-repeat="error in errors"> {{ error }} </li>
                 </ul>
-                <ul class="amz_link">
+                <ul>
                     <div ng-repeat="row in populars">
-                        <b>DATE:{{ row.created_time |date:'medium' }}</b><br/>
-                        <b>LIKES:{{ row.likes.count }}</b><br/>
+                        <b>DATE: {{ row.created_time| date:"MM/dd/yyyy 'at' h:mma" }}</b><br/>
+                        <b style="color: red;">LIKES♡: {{ row.likes.count }}</b><br/>
                         <a target="_blank" class="clearfix" href="{{ row.link }}">
                             <img ng-src="{{ row.images.standard_resolution.url }}">
                             {{ row.caption.text }}

@@ -50,6 +50,7 @@ app.controller('controller', function($scope, $location, $http) {
                 console.log(data.data);
                 $scope.populars = [];
                 angular.forEach(data.data, function(row, i){
+                    row.created_time = new Date(row.created_time*1000);
                     this.push(row);
                 }, $scope.populars);
             }
