@@ -8,31 +8,91 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/angular-resource.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/turnBox.js"></script>
+
 
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-51540616-1', 'manchan.github.io');
-        ga('require', 'displayfeatures');
-        ga('send', 'pageview');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-51540616-1', 'manchan.github.io');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
     </script>
+
+    <style type="text/css">
+
+    body {
+        background-color: #3a3a3a;
+        padding-top: 100px;
+        color: white;
+        font-size: 20px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h2 {
+        display: block;
+        width: 100%;
+        font-weight: 300;
+        font-size: 20px;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .example {
+        margin: 0px auto;
+        padding: 10px;
+        line-height: 4.2;
+        float: left;
+    }
+
+    .turnBoxButton {
+        display: block;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .turnBoxFaceNum1 {
+        background-color: #101010;
+    }
+
+    .turnBoxCurrentFace1 > .turnBoxFaceNum1 {
+        background-color: #2a2a2a;
+    }
+
+    .turnBoxCurrentFace1 > .turnBoxFaceNum1:hover {
+        background-color: #222222;
+    }
+
+    .turnBoxFaceNum2 {
+        background-color: #0087b7;
+    }
+
+    .turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+        background-color: #00adea;
+    }
+
+    .turnBoxCurrentFace2 > .turnBoxFaceNum2:hover {
+        background-color: #00a2db;
+    }
+
+    </style>
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
-<div class="container">
-    <div class="main">
-        <div id="header" class="center">
-            <h1>Insta Popular</h1>
-            <p>
-            </p>
-            <p class="center"></p>
-        </div>
+    <div class="container">
+        <div class="main">
+            <div id="header" class="center">
+                <h1>Insta Popular</h1>
+                <p>
+                </p>
+                <p class="center"></p>
+            </div>
 
-        <!-- /header -->
-        <div class="row">
+            <!-- /header -->
+            <div class="row">
             <!--             <div id="form" class="col-md-5">
                             <form role="form" ng-submit="submit(true)">
                                 <div class="form-group">
@@ -43,32 +103,55 @@
                                 </div>
                             </form>
                         </div>
-             -->        </div>
-        <br/>
-        <div>
-            <div class="col-md-12">
-                <h3></h3>
-                <ul>
-                    <li class="err" ng-repeat="error in errors"> {{ error }} </li>
-                </ul>
-                <ul>
-                    <div ng-repeat="row in populars">
-                        <b>DATE: {{ row.created_time| date:"MM/dd/yyyy 'at' h:mma" }}</b><br/>
-                        <b style="color: red;">LIKES♡: {{ row.likes.count }}</b><br/>
-                        <a target="_blank" class="clearfix" href="{{ row.link }}">
-                            <img ng-src="{{ row.images.standard_resolution.url }}">
-                            {{ row.caption.text }}
-                        </a>
+                    -->        </div>
+                    <br/>
+                    <div>
+                        <div class="col-md-12">
+                            <h3></h3>
+                            <ul>
+                                <li class="err" ng-repeat="error in errors"> {{ error }} </li>
+                            </ul>
+                            <ul>
+
+                                <div class="example switch"><div><p class="turnBoxButton">OFF</p></div><div><p class="turnBoxButton turnBoxButtonPrev">ON</p></div>
+                            </div>
+
+                            <div class="imagesInsta">
+                            </div>   
+<!--                             <div ng-repeat="row in populars">
+                                <b>DATE: {{ row.created_time| date:"MM/dd/yyyy 'at' h:mma" }}</b><br/>
+                                <b style="color: red;">LIKES♡: {{ row.likes.count }}</b><br/>
+                                <a target="_blank" class="clearfix" href="{{ row.link }}">
+                                    <img ng-src="{{ row.images.standard_resolution.url }}">
+                                    {{ row.caption.text }}
+                                </a>
+                            </div>
+                        -->                        </ul>
                     </div>
-                </ul>
+                </div>
+                <div id="footer">
+                    <p class="center">
+                        &copy;
+                        <a href="https://github.com/manchan">manchan</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div id="footer">
-            <p class="center">
-                &copy;
-                <a href="https://github.com/manchan">manchan</a>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+        </body>
+
+    <script src="js/app.js"></script>
+        <script type="text/javascript">
+//         $(".example").turnBox({
+//             width: 320,
+//             height: 320,
+//             axis: "X"
+//   // even:,
+//   // perspective: 800,
+//   // duration: 200,
+//   // delay: 0,
+//   // easing: "linear",
+//   // direction: "positive",
+//   // type: "skip"
+// });
+        </script>
+
+        </html>

@@ -16,7 +16,7 @@ app.controller('controller', function($scope, $location, $http) {
         name : 'artist',
         remote : {
             url: 'http://ws.audioscrobbler.com/2.0/?api_key=6a6281367c3ad09f1b4a7c15dc50675b'
-                + '&method=artist.search&limit=5&artist=%QUERY&format=json',
+            + '&method=artist.search&limit=5&artist=%QUERY&format=json',
             dataType : 'jsonp',
             template: '<p><strong>{{name}}</strong></p>',
             filter : function(res){
@@ -48,12 +48,28 @@ app.controller('controller', function($scope, $location, $http) {
             // Data Get Success
             if (data != ''){
                 console.log(data.data);
-                $scope.populars = [];
-                angular.forEach(data.data, function(row, i){
-                    row.created_time = new Date(row.created_time*1000);
-                    this.push(row);
+
+
+
+// Object.keys(data.data).forEach(function (key) {
+//   console.log(key + "は" + data.data[key] + "と鳴いた！");
+// });
+
+
+        jQuery.each(data.data, function (index, row) {
+           $('.imagesInsta').append('<div class="example switch"><div><p class="turnBoxButton">OFF</p></div><div><p class="turnBoxButton turnBoxButtonPrev">ON</p></div>');
+    }).promise().done( function(){ alert("All was done"); } );
+
+
+        $scope.populars = [];
+        angular.forEach(data.data, function(row, i){
+            row.created_time = new Date(row.created_time*1000);
+                    // this.push(row);
+
+
+
                 }, $scope.populars);
-            }
+    }
             // Failure
             else{
                 //                    $scope.errors.push(data.error);
@@ -62,4 +78,25 @@ app.controller('controller', function($scope, $location, $http) {
             // or server returns response with an error status.
             $scope.errors.push(status);
         });
+    });
+
+
+        // $(".example").turnBox({
+        //     width: 320,
+        //     height: 320,
+        //     axis: "X"
+        // });
+
+
+$(function() {
+    $(document).on('click', '.example', function(){
+
+        // $(".example").turnBox({
+        //     width: 320,
+        //     height: 320,
+        //     axis: "X"
+        // });
+    });
 });
+
+
