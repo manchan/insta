@@ -1,0 +1,85 @@
+<div class="row">
+    <div id="form" class="col-md-5">
+        <form role="form" ng-submit="submit(true)">
+            <div class="form-group">
+                <input type="text" class="form-control typeahead"
+                       placeholder="tag name"
+                       ng-model="tag" />
+                <button type="submit" class="btn btn-default"><b>Search</b></button>
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <p>
+        <a href="#/info/">info</a>
+    </p>
+</div>
+<div class="wrap">
+    <div id="side">
+        <button type="button" class="btn btn-info auto-scroll" id="scrollBt" data-ng-click="sctrollCtl()">Auto Scroll</button>
+    </div>
+    <div class="pics_wrap" infinite-scroll='insta.nextPage()' infinite-scroll-disabled='insta.busy' infinite-scroll-distance='1'>
+        <!--<ul>-->
+        <!--<li class="err" ng-repeat="error in errors"> {{ error }} </li>-->
+        <!--</ul>-->
+        <ul>
+            <li ng-repeat="row in insta.items" data-ng-element-ready="" class="instpics switch" repeat-done="layoutDone()">
+                <div onclick="switchColor(this.nextSibling);">
+                    <img ng-src="{{ row.images.standard_resolution.url }}" class="turnBoxButton">
+                </div>
+                <div class="turnBoxButton turnBoxButtonPrev">
+                    <p><a class="insttext" target="_blank" href="{{ row.link }}">{{ row.caption.text }}</a></p>
+                    <b style="color: red;">LIKES♡: {{ row.likes.count }}</b><br/>
+                    <b>DATE: {{ row.created_time| date:"MM/dd/yyyy 'at' h:mma" }}</b>
+                    <div class="login-sns">
+                        <a onclick="onSnsBt();">
+                            <img class="icon" src="img/icon_sns_googleplus.png" alt="">
+                        </a>
+                        <a>
+                            <img class="icon" src="img/icon_sns_twitter.png" alt="">
+                        </a>
+                        <a>
+                            <img class="icon" src="img/icon_sns_facebook.png" alt="">
+                        </a>
+                        <a>
+                            <img class="icon" src="img/icon_sns_facebook.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="buttom"></div>
+    <div class="busy" ng-show='insta.busy'>Loading data...</div>
+</div>
+<script type="text/javascript">
+    $(".instpics").turnBox({
+        width: 320,
+        height: 320,
+        axis: "X",
+        duration: 400,
+    });
+
+    $(function() {
+        $(".login-sns .icon").addClass("show");
+        // $(".login-sns a").on("click", function()
+        // {
+        //     $(this).children().removeClass("show");
+        //     $(this).children(".loading").addClass("show");
+        //     setTimeout(function()
+        //     {
+        //         general_box.turnBoxAnimate(
+        //         {
+        //           face: 3
+        //       });
+        //         setTimeout(function()
+        //         {
+        //           $(".login-sns a").children().removeClass("show");
+        //           $(".login-sns a").children(".icon").addClass("show");
+        //       }, duration);
+        //     }, 1000);
+        // });
+    });
+</script>

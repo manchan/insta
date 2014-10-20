@@ -1,157 +1,44 @@
 <!DOCTYPE html>
-<html ng-app="insta" ng-controller="controller">
+<html ng-app="insta" ng-controller="MainController">
 <head>
     <meta charset="utf-8">
     <title ng-bind="title">insta</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/typeahead.js-bootstrap.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/spectrum.css" rel="stylesheet">
+
     <script src="js/jquery.js"></script>
     <script src="js/typeahead.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/angular-resource.min.js"></script>
-    <script src="js/turnBox.js"></script>
-
-
-    <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-51540616-1', 'manchan.github.io');
-    ga('require', 'displayfeatures');
-    ga('send', 'pageview');
-    </script>
-
-    <style type="text/css">
-
-    body {
-        background-color: #3a3a3a;
-        padding-top: 100px;
-        color: white;
-        font-size: 20px;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    h2 {
-        display: block;
-        width: 100%;
-        font-weight: 300;
-        font-size: 20px;
-        margin-bottom: 50px;
-        text-align: center;
-    }
-
-    .example {
-        margin: 0px auto;
-        padding: 10px;
-        line-height: 4.2;
-        float: left;
-    }
-
-    .turnBoxButton {
-        display: block;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    .turnBoxFaceNum1 {
-        background-color: #101010;
-    }
-
-    .turnBoxCurrentFace1 > .turnBoxFaceNum1 {
-        background-color: #2a2a2a;
-    }
-
-    .turnBoxCurrentFace1 > .turnBoxFaceNum1:hover {
-        background-color: #222222;
-    }
-
-    .turnBoxFaceNum2 {
-        background-color: #0087b7;
-    }
-
-    .turnBoxCurrentFace2 > .turnBoxFaceNum2 {
-        background-color: #00adea;
-    }
-
-    .turnBoxCurrentFace2 > .turnBoxFaceNum2:hover {
-        background-color: #00a2db;
-    }
-
-    </style>
-</head>
-<body data-spy="scroll" data-target=".bs-docs-sidebar">
-
-    <div class="container">
-        <div class="main">
-            <div id="header" class="center">
-                <h1>Insta Popular</h1>
-                <p>
-                </p>
-                <p class="center"></p>
-            </div>
-
-            <!-- /header -->
-            <div class="row">
-            <!--             <div id="form" class="col-md-5">
-                            <form role="form" ng-submit="submit(true)">
-                                <div class="form-group">
-                                    <input type="text" class="form-control typeahead"
-                                           placeholder="Artist name"
-                                           ng-model="artist" />
-                                    <button type="submit" class="btn btn-default"><b>Play</b></button>
-                                </div>
-                            </form>
-                        </div>
-                    -->        </div>
-                    <br/>
-                    <div>
-                        <div class="col-md-12">
-                            <h3></h3>
-                            <ul>
-                                <li class="err" ng-repeat="error in errors"> {{ error }} </li>
-                            </ul>
-                            <ul>
-
-                                <div class="example switch"><div><p class="turnBoxButton">OFF</p></div><div><p class="turnBoxButton turnBoxButtonPrev">ON</p></div>
-                            </div>
-
-                            <div class="imagesInsta">
-                            </div>   
-<!--                             <div ng-repeat="row in populars">
-                                <b>DATE: {{ row.created_time| date:"MM/dd/yyyy 'at' h:mma" }}</b><br/>
-                                <b style="color: red;">LIKES♡: {{ row.likes.count }}</b><br/>
-                                <a target="_blank" class="clearfix" href="{{ row.link }}">
-                                    <img ng-src="{{ row.images.standard_resolution.url }}">
-                                    {{ row.caption.text }}
-                                </a>
-                            </div>
-                        -->                        </ul>
-                    </div>
-                </div>
-                <div id="footer">
-                    <p class="center">
-                        &copy;
-                        <a href="https://github.com/manchan">manchan</a>
-                    </div>
-                </div>
-            </div>
-        </body>
-
+    <script data-require="angular.js@1.2.4" data-semver="1.2.4" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+    <script data-require="angular-route@1.2.4" data-semver="1.2.4" src="http://code.angularjs.org/1.2.4/angular-route.min.js"></script>
     <script src="js/app.js"></script>
-        <script type="text/javascript">
-//         $(".example").turnBox({
-//             width: 320,
-//             height: 320,
-//             axis: "X"
-//   // even:,
-//   // perspective: 800,
-//   // duration: 200,
-//   // delay: 0,
-//   // easing: "linear",
-//   // direction: "positive",
-//   // type: "skip"
-// });
-        </script>
-
-        </html>
+    <script src="js/controller.js"></script>
+    <script src="js/ng-infinite-scroll.min.js"></script>
+    <script src="js/turnBox.js"></script>
+    <script src="js/spectrum.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-55503819-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+<img class="bg" src="img/sea.jpg" alt="" />
+<div class="container">
+    <div id="header" class="center">
+        <h1>Insta Surf</h1>
+        <p>
+        </p>
+        <p class="center"></p>
+    </div>
+    <!-- /header -->
+    <div ng-view></div>
+</div>
+</body>
+</html>

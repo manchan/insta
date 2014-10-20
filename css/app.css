@@ -1,0 +1,268 @@
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:400,700);
+
+.container, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+body {
+    background-color: white;
+    padding-top: 100px;
+    color: black;
+    font-size: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img.bg {
+    /* Set rules to fill background */
+    z-index: -100;
+    min-height: 100%;
+    min-width: 1024px;
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
+    /* Set up positioning */
+    position: fixed;
+    /* またはabsolute; */
+    top: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 1024px){
+    img.bg {
+        left: 50%;
+        margin-left: -512px; }
+}
+
+/*video {display:block;}*/
+
+/*#bg-video {*/
+/*position:fixed;*/
+/*right:0;*/
+/*bottom:0;*/
+/*min-width:100%;*/
+/*min-height:100%;*/
+/*width:auto;*/
+/*height:auto;*/
+/*z-index:-1;*/
+/*}*/
+
+p {
+    color: black;
+}
+.center_div {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+a.center {
+    text-align: center;
+}
+h1 {
+    font-weight:bold;
+    text-align: center;
+}
+h2 {
+    display: block;
+    width: 100%;
+    font-weight: 300;
+    font-size: 20px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+h3 {
+    color: #EB6100;
+}
+a {
+    color: #9b9b9b;
+    cursor: pointer;
+}
+a:hover{
+    color: #464646;
+}
+p.insttext {
+    font-size: 8px;
+}
+.container {
+    margin-bottom:80px;
+    width:100%;
+    margin: auto 0;
+}
+.wrap{
+    /*border: 1px solid #c00;*/
+    overflow: hidden;
+}
+#side {
+    float: right;
+    position: fixed;
+    width: 50px;
+    /*background: #ddd;*/
+    z-index: 20;
+}
+* html div#side    {
+    position: absolute;
+    top: expression(eval(document.documentElement.scrollTop+100));
+}
+#header {
+    text-align:center;
+}
+.pics_wrap {
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+.pics_wrap ul {
+    /*position: relative;*/
+    /*left: 50%;*/
+    margin: 5%;
+    /*float: left;*/
+    /*width: 100%;*/
+    list-style: none outside none;
+    float: left;
+    position: relative;
+    left: 50%;
+}
+.pics_wrap ul li {
+    position: relative;
+    left: -50%;
+    float: left;
+    /*margin-bottom: 15px;*/
+    /*box-shadow:5px 5px 10px;*/
+}
+img{
+    /*height:320px; width:320px;*/
+    max-width: 100%;
+    height: auto;
+    width /***/:auto;
+}
+
+.turnBoxButton {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+.turnBoxFaceNum1 {
+    background-color: #101010;
+}
+.turnBoxCurrentFace1 > .turnBoxFaceNum1 {
+    background-color: #2a2a2a;
+}
+.turnBoxCurrentFace1 > .turnBoxFaceNum1:hover {
+    background-color: #222222;
+}
+.turnBoxFaceNum2 {
+    background-color: #0087b7;
+}
+.turnBoxCurrentFace2 > .turnBoxFaceNum2 {
+    background-color: #667479;
+}
+.turnBoxCurrentFace2 > .turnBoxFaceNum2:hover {
+    background-color: #C9DB00;
+}
+#form {
+    width:450px;
+    margin:0 auto;
+    margin-top: 10px;
+    float:none;
+}
+#form .form-control {
+    display:inline;
+    width:330px;
+
+}
+#form .tt-hint {
+    margin:4.5px 9.5px;
+    height: 25px;
+}
+#form button {
+    margin:4px 0 0 5px;
+    width:80px;
+}
+#social-buttons {
+    width:420px;
+    margin:0 auto;
+    padding-left:20px;
+}
+
+#list-intro {
+    font-family:'YuGothic', 'Yu Gothic', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+    font-size:1.2em;
+    display:none;
+}
+
+address {
+    font-style:italic;
+}
+.tt-suggestion p{
+    color: gray;
+}
+
+#artist_info{
+    margin-top: 30px;
+}
+
+.busy{
+    float: left;
+}
+
+.col_set{
+    /*float: left;*/
+}
+
+.login-sns {
+    position: absolute;
+    width: 100%;
+    font-size: 0;
+    bottom: 0;
+    background-color: rgba(207, 207, 207, 0.95);
+    padding: 10px 0px;
+}
+
+.login-sns a {
+    -webkit-transition: all 100ms ease-in-out 0ms;
+    -moz-transition: all 100ms ease-in-out 0ms;
+    -ms-transition: all 100ms ease-in-out 0ms;
+    -o-transition: all 100ms ease-in-out 0ms;
+    transition: all 100ms ease-in-out 0ms;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-right: 20px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.login-sns a:hover {
+    background-color: #ddd;
+}
+
+.login-sns a:last-child {
+    margin-right: 0;
+}
+
+.login-sns img {
+    display: none;
+    /*padding-top: 13px;*/
+    margin: 12px;
+    width: 25px;
+    height: 25px;
+    opacity: 0.5;
+}
+
+.login-sns img.show {
+    display: inline;
+}
+
+.login-sns .loading {
+    padding-top: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.login-sns img.show {
+    display: inline;
+}
+

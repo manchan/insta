@@ -1,0 +1,305 @@
+<style type="text/css">
+    h2 {
+        display: block;
+        width: 100%;
+        font-weight: 300;
+        font-size: 20px;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+    .example {
+        color: #fff;
+        margin: 0px auto;
+        text-align: center;
+    }
+    .color-picker {
+        margin: 0px auto;
+    }
+    .turnBoxFaceNum1 .turnBoxButton {
+        width: 100%;
+        height: 100%;
+    }
+    .turnBoxFaceNum2 {
+        background-color: #2b2b2b;
+    }
+    .hex-display, .hex-display-box, .hex-display-box-hover {
+        line-height: 4.2;
+    }
+    .bg-filter {
+        -webkit-transition: all 450ms ease-in-out 0ms;
+        -moz-transition: all 450ms ease-in-out 0ms;
+        -ms-transition: all 450ms ease-in-out 0ms;
+        -o-transition: all 450ms ease-in-out 0ms;
+        transition: all 450ms ease-in-out 0ms;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum1 .bg-filter, .example.turnBoxCurrentFace2 > .turnBoxFaceNum2 .bg-filter {
+        opacity: 0;
+    }
+
+    .example.turnBoxCurrentFace1 > .turnBoxFaceNum1:hover .bg-filter {
+        opacity: 0.5;
+    }
+
+    .sp-container {
+        border: none;
+        background-color: transparent;
+    }
+
+    .sp-picker-container {
+        box-sizing: border-box;
+        border-left: none;
+        width: 100%;
+        top: 3px;
+    }
+
+    .sp-container .sp-top {
+        width: 220px;
+    }
+
+    .sp-container .sp-color, .sp-container .sp-hue {
+        border: none;
+    }
+
+    .sp-container .sp-hue {
+        left: 85%;
+        right: 5px;
+    }
+
+    .sp-container .sp-button-container {
+        display: none;
+    }
+
+    .sp-container .sp-input-container {
+        float: none;
+        display: inline-block;
+        width: 30%;
+        vertical-align: bottom;
+        margin-bottom: 7px;
+    }
+
+    .sp-container .sp-input {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #fff;
+        border: none;
+        border-radius: 0px;
+        text-align: center;
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 15px !important;
+        margin-left: 5px;
+    }
+
+    .sp-container .sp-input:focus {
+        border: none;
+    }
+
+    .sp-container .sp-initial {
+        border: none;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+    .sp-container .sp-initial span {
+        float: none;
+        width: 80px;
+        height: 65px;
+    }
+</style>
+
+<h2>INFO AND SETTINGS</h2>
+<a class="center" href="" ng-click="backClick()">Back</a>
+<div class="col-md-12">
+    <p class="center"><a href="" ng-click="backClick()">Insta Surf</a> is instagram search find popular photos and search tag's recent photos</p>
+    <p class="center">Having Fun</p>
+    <p class="center">
+        <small>&copy;
+            <a target="_blank" href="http://manchan.github.io/">manchan</a>,
+            <b>Insta Surf</b> using Instagram API, TurnBox js, Twitter Bootstrap and GitHub
+        </small>
+    </p>
+</div>
+<br>
+<div class="col_set">
+    <h2>BACKGROUND COLOR SETTING</h2>
+    <div class="example" id="bg_color">
+        <div>
+            <p class="hex-display"></p>
+            <div class="bg-filter turnBoxButton"></div>
+        </div>
+        <div>
+            <div class="color-picker-container"></div>
+            <div class="bg-filter"></div>
+        </div>
+    </div>
+    <br>
+    <h2>BOX COLOR SETTING</h2>
+    <div class="example" id="box_color">
+        <div>
+            <p class="hex-display-box"></p>
+            <div class="bg-filter turnBoxButton"></div>
+        </div>
+        <div>
+            <div class="color-picker-container_box"></div>
+            <div class="bg-filter"></div>
+        </div>
+    </div>
+    <div class="center_div">
+        <a class="center" href="javascript:void(0);" onclick="box_col_reset();">reset</a>
+    </div>
+    <br>
+    <h2>BOX HOVER COLOR SETTING</h2>
+    <div class="example" id="box_hover_color">
+        <div>
+            <p class="hex-display-box-hover"></p>
+            <div class="bg-filter turnBoxButton"></div>
+        </div>
+        <div>
+            <div class="color-picker-container_box_hover"></div>
+            <div class="bg-filter"></div>
+        </div>
+    </div>
+    <div class="center_div">
+        <a class="center" href="javascript:void(0);" onclick="all_reset();">All Reset</a>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    var session_storage;
+    var local_storage;
+
+    // Web Storage Set
+    if(window.sessionStorage){
+        session_storage = window.sessionStorage;
+        local_storage   = window.localStorage;
+    }
+
+    var width = 340;
+    var box = $(".example");
+    var bg_colorpicker = box.find(".color-picker-container");
+    var box_colorpicker = box.find(".color-picker-container_box");
+    var box_hover_colorpicker = box.find(".color-picker-container_box_hover");
+    var duration = 300;
+    var height = 200;
+    var default_color = "#ffffff";
+    var storage_colors = {bg_color:"", box_color:"", box_hover_color:""};
+
+    Object.keys(storage_colors).forEach(function (key) {
+
+        if(sessionStorage.getItem(key) != undefined)
+            storage_colors[key] = sessionStorage.getItem(key);
+        else
+            storage_colors[key] = "#07f6ee";
+    });
+
+    box.turnBox(
+            {
+                width: width,
+                height: 87,
+                even: height,
+                duration: duration
+            });
+
+    col_spectrum_set(bg_colorpicker, storage_colors['bg_color'], ".hex-display", "bg_color", isBg = 1);
+    col_spectrum_set(box_colorpicker, storage_colors['box_color'], ".hex-display-box", "box_color", isBg = 0);
+    col_spectrum_set(box_hover_colorpicker, storage_colors['box_hover_color'], ".hex-display-box-hover", "box_hover_color", isBg = 0);
+
+    function col_spectrum_set(colorpicker, initial_color, display_class, storage_key, isBg)
+    {
+        colorpicker.spectrum({
+            preferredFormat: "hex",
+            containerClassName: "picker-bg",
+            flat: true,
+            color: initial_color,
+            showInput: true,
+            showInitial: true,
+            move: function(color)
+            {
+                if(color.toRgb().r + color.toRgb().g + color.toRgb().b > (255 * 3) / 2) {
+                    $(display_class).css("color", "#2b2b2b");
+                } else {
+                    $(display_class).css("color", "#fff");
+                }
+
+                $(display_class).text("").text(color.toHexString());
+
+                box.children("#"+ storage_key + " .turnBoxFaceNum1").css(
+                        {
+                            "background": color.toHexString()
+                        });
+
+                if(isBg == 1)
+                    $("body").css("background", color.toHexString());
+
+                if(window.sessionStorage)
+                    sessionStorage.setItem(storage_key, color.toHexString());
+            }
+        });
+    }
+
+    function init_colorpicker()
+    {
+        Object.keys(storage_colors).forEach(function (key) {
+            box.children("#"+key+" .turnBoxFaceNum1").css({
+                "background": storage_colors[key]
+            });
+        });
+
+        $(".hex-display").text(storage_colors['bg_color']);
+        $(".hex-display-box").text(storage_colors['box_color']);
+        $(".hex-display-box-hover").text(storage_colors['box_hover_color']);
+    }
+
+    init_colorpicker();
+
+    $(document).on("click", function()
+    {
+        box.turnBoxAnimate();
+    });
+
+    function box_col_reset()
+    {
+        $(".hex-display-box").css("color", default_color).text(default_color);
+        box.children(".box-col .turnBoxFaceNum1").css({ "background": default_color });
+        if(window.sessionStorage)
+            sessionStorage.setItem("box_color","");
+    }
+
+    function all_reset()
+    {
+        $("p").each(function (){
+            if (this.className.match("^hex-display"))
+                $("."+ this.className).css("color", default_color).text(default_color);
+        });
+
+        $("div").each(function (){
+            if (this.className.match("-col$"))
+                box.children("."+ this.className +" .turnBoxFaceNum1").css({"background": default_color});
+        });
+
+        if(window.sessionStorage){
+            // Save Empty
+            Object.keys(storage_colors).forEach(function (key) {
+                sessionStorage.setItem(key,"");
+            });
+        }
+
+        box.children(".turnBoxFaceNum1").css({
+            "background": default_color
+        });
+        $("body").css("background", default_color);
+    }
+</script>
+

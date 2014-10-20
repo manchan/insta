@@ -28,9 +28,6 @@
     direction = setting.direction,
     face_pcs = box.children().length;
 
-
-    console.log(this);
-
     if(face_pcs > 4) {
       var face_pcs = 4;
     }
@@ -722,7 +719,6 @@
       button.on(button_event, function()
       {
 
-        console.log(button_event);
         if(button.attr("class").indexOf("turnBoxButtonFor-") > -1) {
           var reg = new RegExp("(turnBoxButtonFor-)([^ ]*)", "gi");
           var sliced_class = reg.exec(button.attr("class"))[2];
