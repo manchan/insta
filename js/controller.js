@@ -97,15 +97,16 @@ app.factory('Insta', function($http) {
                 Insta.bind(this);
             }
 
-            var url = 'https://api.instagram.com/v1/tags/'+this.query+'/media/recent';
-            if(this.next_url) url = this.next_url;
-            $http.post('http://insta-auth.appspot.com/recenttag.php', {
-                    'next_url': this.next_url ?this.next_url:"",
-                    'query': this.query,
-                    'format' : 'json',
-                    'count' : 20
-                }
-            ).success(function(data, status, headers, config) {
+            var url = 'http://insta-auth.appspot.com/recenttag.php';
+            var parameter = {};
+            parameter.dataType = 'jsonp';
+            parameter.next_url = this.next_url ? this.next_url:"";
+            parameter.query = this.query;
+            parameter.format = 'json';
+            parameter.count = 20;
+
+            $http.get(url, {params : parameter}).success(function(data) {
+                    console.log(data);
                     this.next_url = data.pagination.next_url;
                     var items = data.data;
                     if(items){
