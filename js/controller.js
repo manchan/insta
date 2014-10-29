@@ -111,6 +111,7 @@ app.factory('Insta', function($http) {
                     var items = data.data;
                     if(items){
                         for (var i = 0; i < items.length; i++) {
+                            items[i].created_time = new Date(items[i].created_time * 1000);
                             this.items.push(items[i]);
                         }
                     }else{
@@ -132,6 +133,7 @@ app.factory('Insta', function($http) {
                 var items = data.data;
                 if(items){
                     for (var i = 0; i < items.length; i++) {
+                        items[i].created_time = new Date(items[i].created_time * 1000);
                         this.items.push(items[i]);
                     }
                 }else{
